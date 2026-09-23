@@ -152,6 +152,11 @@ export function DuetComposer({ composer, compact, onExpand, challengeIndex, onNe
 
       <div className="input-panel">
         <div className="input-heading"><h2>The duet deck</h2><span className="input-state"><span aria-hidden="true" />{complete ? 'Complete' : preview.active ? 'Listening to touch' : 'Ready to play'}</span></div>
+        <ol className="duet-steps" aria-label="How to write a chord">
+          <li><span className="step-number">01</span><span><strong>Start</strong><small>anywhere</small></span></li>
+          <li><span className="step-number">02</span><span><strong>Flick</strong><small>both thumbs</small></span></li>
+          <li><span className="step-number">03</span><span><strong>Lift</strong><small>to write</small></span></li>
+        </ol>
         <div className="input-controls">
           <ToggleGroup variant="segmented" size="lg" spacing={0} multiple={false} value={[keyset]} onValueChange={(values) => {
             const next = values[0]

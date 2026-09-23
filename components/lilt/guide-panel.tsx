@@ -38,7 +38,7 @@ export function GuidePanel({ onWatch, disabled }: { onWatch: () => void; disable
     <>
       <aside className="duet-guide" aria-label="Learn to write with Duet">
         <div className="guide-title-row"><h3>Think of a letter. Play a chord.</h3></div>
-        <p className="guide-description">Both thumbs up makes “h”. Where they land doesn&apos;t matter. Learn the moves, then make them together.</p>
+        <p className="guide-description">Both thumbs up makes “h”. Where they land doesn&apos;t matter. Start anywhere, flick a direction, then lift to commit.</p>
         <ChordFinder value={lookup} onChange={setLookup} />
         <div className="guide-example"><span className="guide-pair-note">Try <strong>pairs</strong> for two letters at once.</span><Button variant="default" size="touch" onClick={onWatch} disabled={disabled}><Play data-icon="inline-start" />Watch it</Button></div>
       </aside>
