@@ -196,11 +196,14 @@
 .direction-target { position: absolute; left: var(--direction-x); top: var(--direction-y); transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; width: clamp(44px, 6cqw, 68px); height: 50px; border-radius: 9px; background: var(--card); color: var(--foreground); touch-action: none; transition: background 100ms, color 100ms; }
 .direction-arrow { display: flex; align-items: center; justify-content: center; min-height: 23px; color: var(--muted-foreground); }
 .direction-token { font-size: 14px; line-height: 1.5; white-space: nowrap; }
-.direction-target:hover:not(:disabled) { background: var(--accent); color: var(--primary); }
+.direction-target:hover:not(:disabled), .direction-target:focus-visible { background: var(--accent); color: var(--primary); }
+.direction-target:focus-visible { outline-offset: 2px; }
 .direction-target[data-selected='true'] { background: var(--primary); color: var(--primary-foreground); }
 .direction-target[data-selected='true'] .direction-arrow { color: var(--primary-foreground); }
 .direction-target:disabled { cursor: default; opacity: 0.6; }
-.touch-vector { position: absolute; pointer-events: none; z-index: 1; }
+.touch-vector { position: absolute; pointer-events: none; z-index: 1; transition: transform 90ms cubic-bezier(.2,.8,.2,1); }
+.touch-end { transition: transform 90ms cubic-bezier(.2,.8,.2,1); }
+.direction-target[data-selected='true'] { box-shadow: 0 5px 14px -9px color-mix(in srgb, var(--primary) 70%, transparent); }
 .touch-origin, .touch-end { position: absolute; width: 10px; height: 10px; border-radius: 50%; margin-left: -5px; margin-top: -5px; background: var(--primary); }
 .touch-origin { background: var(--card); border: 2px solid var(--primary); }
 .touch-connection { position: absolute; height: 2px; background: var(--primary); transform-origin: 0 50%; }

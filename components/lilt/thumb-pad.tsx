@@ -29,7 +29,11 @@ export function ThumbPad({ hand, labels, selected, demo, disabled, blocked, onBe
     const vector = { x: event.clientX - touch.rect.left - touch.origin.x, y: event.clientY - touch.rect.top - touch.origin.y }
     if (Math.hypot(vector.x, vector.y) >= FLICK_THRESHOLD) touch.moved = true
     touch.direction = directionFromVector(vector, touch.direction)
-    setVisual({ origin: touch.origin, offset: vector })
+    const snapDistance = Math.min(touch.rect.width, touch.rect.height) * 0.27
+    const snappedOffset = touch.direction === null
+      ? vector
+      : { x: DIRECTIONS[touch.direction].x * snapDistance, y: DIRECTIONS[touch.direction].y * snapDistance }
+    setVisual({ origin: touch.origin, offset: snappedOffset })
     onMove(hand, touch.pointer, touch.direction)
   }
 
