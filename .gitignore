@@ -13,7 +13,17 @@ __v0_jsx-dev-runtime.ts
 node_modules
 .next/
 .tools/
+.DS_Store
+
+# Android build
 android/.gradle/
+android/build/
 android/app/build/
 android/local.properties
-.DS_Store
+android/.idea/
+*.iml
+
+# Do not commit truncated / ad-hoc APKs at the repo root.
+# Ship APKs from android/app/build/outputs/apk/ or GitHub Releases.
+/Duet-debug.apk
+/*.apk
