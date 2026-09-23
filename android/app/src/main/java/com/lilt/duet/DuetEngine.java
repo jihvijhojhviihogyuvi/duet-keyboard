@@ -3,11 +3,6 @@ package com.lilt.duet;
 import java.util.Locale;
 
 final class DuetEngine {
-    static final int LETTERS = 0;
-    static final int PAIRS = 1;
-    static final int NUMBERS = 2;
-    static final int ACCENTS = 3;
-    static final int SYMBOLS = 4;
     static final String REPEAT = "↻";
     static final String BACKSPACE = "⌫";
     static final String[] LAYER_IDS = {"abc", "pairs", "123", "àé", "#+"};
@@ -18,15 +13,16 @@ final class DuetEngine {
             {"á", "à", "â", "ä", "ã", "å", "æ", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "ö", "õ", "ø", "œ", "ú", "ù", "û", "ü", "ý", "ÿ", "ñ", "ç", "ğ", "ş", "č", "š", "ž", "ß"},
             {"£", "¥", "¢", "€", "$", "%", "*", "+", "−", "÷", "×", "=", "<", ">", "≤", "≥", "≠", "≈", "_", "~", "`", "^", "|", "\\", "@", "#", "&", "§", "©", "®", "°", "•", "…", "\"", "'", ":"}
     };
-    static final String[] GLYPHS = {"↖", "↑", "↗", "↘", "↓", "↙"};
+    static final float[] DIR_X = {-0.866f, 0f, 0.866f, 0.866f, 0f, -0.866f};
+    static final float[] DIR_Y = {-0.5f, -1f, -0.5f, 0.5f, 1f, 0.5f};
 
     static int directionFromVector(float x, float y, int previous) {
         double length = Math.hypot(x, y);
-        if (length < 18) return previous;
+        if (length < 22) return previous;
         double angle = Math.atan2(x, -y) * 180.0 / Math.PI;
         if (previous >= 0) {
             double difference = ((angle - (previous * 60 - 60) + 540) % 360) - 180;
-            if (Math.abs(difference) <= 38) return previous;
+            if (Math.abs(difference) <= 32) return previous;
         }
         int wrapped = (int) Math.round(((angle + 420) % 360) / 60.0) % 6;
         if (wrapped < 0) wrapped += 6;
@@ -36,6 +32,14 @@ final class DuetEngine {
     static String token(int layer, int left, int right) {
         if (layer < 0 || layer >= KEYS.length || left < 0 || left > 5 || right < 0 || right > 5) return null;
         return KEYS[layer][left * 6 + right];
+    }
+
+    static void fillRow(int layer, int left, String[] out) {
+        for (int right = 0; right < 6; right++) out[right] = token(layer, left, right);
+    }
+
+    static void fillCol(int layer, int right, String[] out) {
+        for (int left = 0; left < 6; left++) out[left] = token(layer, left, right);
     }
 
     static String applyCase(String token, int mode) {
@@ -60,6 +64,7 @@ final class DuetEngine {
     }
 
     static String display(String token) {
+        if (token == null) return "";
         if (" ".equals(token)) return "␣";
         if ("\n".equals(token)) return "↵";
         return token;
