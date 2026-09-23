@@ -10,9 +10,9 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'lilt — Big thoughts. Small movements.',
+  title: 'lilt / Pivot — Not predicted. Written.',
   description:
-    'An experimental, touch-only way to write in phrase folds. Reshape whole thoughts on tiny screens, without a microphone, camera, or sending your words to a server.',
+    'An exact gesture alphabet for names, made-up words, and your own thoughts. Bend to select letters or tap directly. No dictionary, microphone, camera, or server required.',
   applicationName: 'lilt',
   icons: { icon: '/lilt-icon.svg' },
 }
@@ -21,7 +21,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   colorScheme: 'light',
-  themeColor: '#F6F7F4',
+  themeColor: '#F4F6FA',
 }
 
 export default function RootLayout({
