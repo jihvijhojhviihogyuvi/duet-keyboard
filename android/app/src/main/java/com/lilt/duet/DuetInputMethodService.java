@@ -131,7 +131,7 @@ public final class DuetInputMethodService extends InputMethodService {
             backRect.set(p, barY, p + 64 * density, barY + barH);
             enterRect.set(w - p - 64 * density, barY, w - p, barY + barH);
             spaceRect.set(backRect.right + 8 * density, barY, enterRect.left - 8 * density, barY + barH);
-            keyR = Math.min(leftPad.width(), leftPad.height()) * 0.155f;
+            keyR = Math.min(leftPad.width(), leftPad.height()) * 0.19f;
             placeKeys(0, leftPad);
             placeKeys(1, rightPad);
         }
@@ -270,35 +270,25 @@ public final class DuetInputMethodService extends InputMethodService {
             paint.setStyle(Paint.Style.FILL);
             paint.setColor(snapped ? Color.WHITE : INK);
             paint.setTextAlign(Paint.Align.CENTER);
-            paint.setTypeface(snapped ? medium : regular);
+            paint.setTypeface(medium);
 
             if (otherSet) {
                 int left = hand == 0 ? dir : dirs[0];
                 int right = hand == 1 ? dir : dirs[1];
                 String token = DuetEngine.applyCase(DuetEngine.token(layer, left, right), shift);
-                paint.setTextSize((snapped ? 17 : 14) * density);
-                canvas.drawText(DuetEngine.display(token), x, y + 6 * density, paint);
+                paint.setTextSize((snapped ? 20 : 16) * density);
+                canvas.drawText(DuetEngine.display(token), x, y + 7 * density, paint);
             } else {
                 if (hand == 0) DuetEngine.fillRow(layer, dir, cluster);
                 else DuetEngine.fillCol(layer, dir, cluster);
-                float s = clusterFits(cluster) ? 9 * density : 8 * density;
-                paint.setTextSize(s);
-                for (int row = 0; row < 2; row++) {
-                    for (int col = 0; col < 3; col++) {
-                        int idx = row * 3 + col;
-                        String label = DuetEngine.display(DuetEngine.applyCase(cluster[idx], shift));
-                        float tx = x + (col - 1) * (r * 0.55f);
-                        float ty = y + (row - 0.35f) * (r * 0.62f) + 3 * density;
-                        canvas.drawText(label, tx, ty, paint);
-                    }
-                }
+                String first = DuetEngine.display(DuetEngine.applyCase(cluster[0], shift));
+                String last = DuetEngine.display(DuetEngine.applyCase(cluster[5], shift));
+                String label = first.equals(last) ? first : first + "–" + last;
+                if (label.length() > 6) label = first;
+                paint.setTextSize((snapped ? 14 : 12) * density);
+                canvas.drawText(label, x, y + 5 * density, paint);
             }
             paint.setTextAlign(Paint.Align.LEFT);
-        }
-
-        private boolean clusterFits(String[] six) {
-            for (String item : six) if (item != null && item.length() > 1) return false;
-            return true;
         }
 
         private void drawBarButton(Canvas canvas, RectF box, String label, boolean pressed) {
