@@ -10,9 +10,9 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'lilt / Pivot — Not predicted. Written.',
+  title: 'lilt / Duet — Play your words.',
   description:
-    'An exact gesture alphabet for names, made-up words, and your own thoughts. Bend to select letters or tap directly. No dictionary, microphone, camera, or server required.',
+    'An experimental, keyless two-thumb writing instrument. Two relative flicks form an exact character or letter pair. No swipe keyboard, predictions, microphone, or camera.',
   applicationName: 'lilt',
   icons: { icon: '/lilt-icon.svg' },
 }

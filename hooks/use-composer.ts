@@ -1,7 +1,7 @@
 'use client'
 
 import { useReducer } from 'react'
-import { characterCount, editorReducer, initialEditorState, type Selection } from '@/lib/pivot-engine'
+import { characterCount, editorReducer, initialEditorState, type Selection } from '@/lib/duet-engine'
 
 export type InputTiming = { startedAt: number; endedAt: number; stroke: boolean }
 
